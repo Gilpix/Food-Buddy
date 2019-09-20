@@ -107,6 +107,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void resetPasswordAuth(View view) {
+        Intent i =new Intent(LoginActivity.this,ResetPassAuthenticate.class);
+        startActivity(i);
+        finish();
+
+
     }
 }
 
