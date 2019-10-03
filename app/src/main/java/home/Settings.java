@@ -25,7 +25,7 @@ public class Settings extends Home {
         //dynamically include the  current activity      layout into  baseActivity layout.now all the view of baseactivity is   accessible in current activity.
 
         getLayout(R.layout.activity_settings);
-        getMenuIcon(R.drawable.settings_gray,R.id.settings);
+        getMenuIcon(R.drawable.settings,R.id.settings);
         setActionBarTitle("Settings");
 
 

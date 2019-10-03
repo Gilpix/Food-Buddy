@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/header_cover_image"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_below="@id/editprofile_signout_layout"
+
+
+            android:scaleType="centerCrop"
+            android:src="@color/main_red" />
+
+        <ImageButton
+            android:id="@+id/user_profile_photo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/header_cover_image"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-60dp"
+            android:background="@drawable/circular_profile_border"
+
+
+            android:elevation="5dp"
+            android:padding="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_pic" />
+
+        <RelativeLayout
+            android:id="@+id/profile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_cover_image"
+            android:background="@color/main_red"
+
+            android:paddingBottom="24dp">
+
+
+            <TextView
+                android:id="@+id/user_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="76dp"
+                android:shadowColor="#161515"
+                android:shadowDx="2"
+
+                android:shadowDy="2"
+                android:shadowRadius="1"
+                android:text="Sonu Singh"
+                android:textColor="#fff"
+
+
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/user_profile_short_bio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/user_profile_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:text="I love Beer"
+                android:textColor="#fff"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/user_profile_short_bio"
+                android:orientation="horizontal"
+                android:layout_marginTop="18dp"
+                >
+
+                <Button
+                    android:id="@+id/send_request"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+
+                    android:layout_marginRight="10dp"
+                    android:onClick="sendRequest"
+                    android:layout_weight="1"
+                    android:background="@drawable/circular_button_white"
+
+                    android:text="INVITE"
+                    android:textColor="@color/main_red"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/send_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="chatWithBuddy"
+                    android:textSize="18dp"
+                    android:textColor="@color/main_red"
+                    android:background="@drawable/circular_button_white"
+                    android:text="MESSAGE" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_layout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/email_lin_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/email_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+
+                    android:background="@drawable/email_icon_red" />
+
+                <TextView
+                    android:id="@+id/email_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+
+                    android:layout_weight=".9"
+
+                    android:inputType="textEmailAddress"
+
+
+                    android:text="sonusingh@gmail.com"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/phone_lin_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/phone_icon"
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+
+                    android:background="@drawable/phone_icon_red" />
+
+                <TextView
+                    android:id="@+id/phone_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+
+                    android:layout_weight=".9"
+
+
+                    android:inputType="phone"
+
+                    android:text="+1514-292-1514"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:id="@+id/age_lin_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/dob_icon"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+
+                    android:background="@drawable/date_icon_red" />
+
+                <TextView
+                    android:id="@+id/dob_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+
+                    android:layout_weight=".9"
+
+
+                    android:inputType="number"
+
+                    android:text="23"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/user_bio_icon"
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+
+                    android:background="@drawable/bio_icon_red" />
+
+                <TextView
+                    android:id="@+id/user_bio_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+
+                    android:layout_weight=".9"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:maxLines="5"
+                    android:scrollbars="vertical"
+
+
+                    android:text="I am Sonu Singh, i love veg food."
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</ScrollView>

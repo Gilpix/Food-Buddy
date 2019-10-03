@@ -1,40 +1,20 @@
 package com.kulartist.foodbuddy;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.READ_CONTACTS;
+import home.Buddies;
 
 /**
  * A login screen that offers login via email/password.
@@ -58,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
      */
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
+    private TextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -70,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = (TextView) findViewById(R.id.email);
 
         mPasswordView = (EditText) findViewById(R.id.password);
 
@@ -82,34 +62,52 @@ public class LoginActivity extends AppCompatActivity {
         // Store values at the time of the login attempt.
          email = mEmailView.getText().toString();
          password = mPasswordView.getText().toString();
-        Toast.makeText(this,password+" - Wrong - "+email,Toast.LENGTH_LONG).show();
+
 
 
     }
 
     public void signIn(View view) {
 
-       // if(email.equals("a") && password.equals("a"))
+       if(mEmailView.getText().toString().equals("a") && mPasswordView.getText().toString().equals("a"))
         {
-            Intent i =new Intent(LoginActivity.this,SplashScreen.class);
+            Intent i = new Intent(LoginActivity.this, Buddies.class);
             startActivity(i);
             finish();
         }
-      //  else
+        else
+       {
+           AlertDialog.Builder dlgAlert = new AlertDialog.Builder(LoginActivity.this, R.style.AlertDialogCustom);
+           //AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+
+
+           dlgAlert.setMessage("You have entered wrong password or username");
+           dlgAlert.setTitle("Error Message...");
+           dlgAlert.setPositiveButton("OK", null);
+           dlgAlert.setCancelable(true);
+           dlgAlert.create().show();
+
+           dlgAlert.setPositiveButton("DISMISS",
+                   new DialogInterface.OnClickListener() {
+                       public void onClick(DialogInterface dialog, int which)
+                       {
+
+                       }});
+       }
            // Toast.makeText(this,password+" Wrong "+email,Toast.LENGTH_LONG).show();
 
     }
 
     public void signUp(View view) {
-        Intent i =new Intent(LoginActivity.this,Registration.class);
+        Intent i =new Intent(LoginActivity.this, Registration.class);
         startActivity(i);
-        finish();
+        //finish();
     }
 
     public void resetPasswordAuth(View view) {
         Intent i =new Intent(LoginActivity.this,ResetPassAuthenticate.class);
         startActivity(i);
-        finish();
+        //finish();
 
 
     }

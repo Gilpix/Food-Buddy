@@ -27,7 +27,7 @@ public class MyProfile extends Home {
 
 
         getLayout(R.layout.activity_my_profile);
-        getMenuIcon(R.drawable.profile__gray,R.id.my_profile);
+        getMenuIcon(R.drawable.profile,R.id.my_profile);
         setActionBarTitle("My Profile");
 
 

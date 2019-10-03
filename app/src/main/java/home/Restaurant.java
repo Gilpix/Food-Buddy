@@ -81,7 +81,7 @@ public class Restaurant extends Home {
 
 
         getLayout(R.layout.activity_restaurant);
-        getMenuIcon(R.drawable.restaurant_gray,R.id.restaurents);
+        getMenuIcon(R.drawable.rest,R.id.restaurents);
         setActionBarTitle("Restaurant");
 
 

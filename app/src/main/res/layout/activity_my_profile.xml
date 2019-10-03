@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/editprofile_signout_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/main_red"
+            android:gravity="end"
+            >
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/edit_profile_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@color/main_red"
+                android:gravity="end"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/edit_profile_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="9dp"
+                    android:onClick="editSaveProfile"
+                    android:paddingRight="10dp"
+                    android:text="Edit"
+                    android:shadowColor="#161515"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="1"
+
+
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+
+                    android:textStyle="bold" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/signout_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/main_red"
+                android:gravity="end"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/edit_signout_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+
+                    android:shadowColor="#161515"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="1"
+
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="9dp"
+                    android:onClick="signOut"
+                    android:paddingRight="10dp"
+                    android:text="Signout"
+
+
+
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+
+                    android:textStyle="bold" />
+            </android.support.design.widget.TextInputLayout>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/header_cover_image"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_below="@id/editprofile_signout_layout"
+
+
+            android:scaleType="centerCrop"
+            android:src="@color/main_red" />
+
+        <ImageButton
+            android:id="@+id/user_profile_photo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/circular_profile_border"
+
+            android:layout_below="@+id/header_cover_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-60dp"
+
+
+            android:elevation="5dp"
+            android:padding="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_pic" />
+
+        <RelativeLayout
+            android:id="@+id/profile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_cover_image"
+            android:background="@color/main_red"
+
+            android:paddingBottom="24dp">
+
+
+
+
+
+            <TextView
+                android:id="@+id/user_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="76dp"
+                android:text="Kuldeep Singh"
+                android:textColor="#fff"
+
+                android:shadowColor="#161515"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="1"
+
+
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/user_profile_short_bio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/user_profile_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:text="I love Beer"
+                android:textColor="#fff"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_layout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/email_lin_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/email_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+
+                    android:background="@drawable/email_icon_red" />
+
+                <EditText
+                    android:id="@+id/email_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+
+                    android:layout_weight=".9"
+
+                    android:inputType="textEmailAddress"
+
+
+                    android:text="kulsinggh@gmail.com"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/phone_lin_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/phone_icon"
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+
+                    android:background="@drawable/phone_icon_red" />
+
+                <EditText
+                    android:id="@+id/phone_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+
+                    android:layout_weight=".9"
+
+
+                    android:inputType="phone"
+
+                    android:text="+1514-292-1514"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:id="@+id/age_lin_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/dob_icon"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+
+                    android:background="@drawable/date_icon_red" />
+
+                <EditText
+                    android:id="@+id/dob_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+
+                    android:layout_weight=".9"
+
+
+                    android:inputType="number"
+
+                    android:text="25"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/user_bio_icon"
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+
+                    android:background="@drawable/bio_icon_red" />
+
+                <EditText
+                    android:id="@+id/user_bio_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+
+                    android:layout_weight=".9"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:maxLines="5"
+                    android:scrollbars="vertical"
+
+
+                    android:text="kulsinggh@gmail.com"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

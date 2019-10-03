@@ -22,7 +22,7 @@ public class Notification extends Home {
 
 
         getLayout(R.layout.activity_notification);
-        getMenuIcon(R.drawable.notification_gray,R.id.notification);
+        getMenuIcon(R.drawable.notification,R.id.notification);
         setActionBarTitle("Notifications");
 
 

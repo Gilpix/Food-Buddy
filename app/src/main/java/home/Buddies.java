@@ -88,7 +88,7 @@ public class Buddies extends Home {
 
         RadioGroup rg=(RadioGroup)findViewById(R.id.radioGroup1);
         RadioButton rb=(RadioButton)findViewById(R.id.buddies);
-        rb.setCompoundDrawablesWithIntrinsicBounds( 0,R.drawable.home_gray, 0,0);
+        rb.setCompoundDrawablesWithIntrinsicBounds( 0,R.drawable.home, 0,0);
         rb.setTextColor(Color.parseColor("#cccccc"));
 
 
@@ -158,20 +158,23 @@ public class Buddies extends Home {
 
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
+                Intent i=new Intent();
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                finishAffinity();
                 finish();
             }
         });
 
-        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+       alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(Buddies.this,"You clicked over No",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Buddies.this,"You clicked over No",Toast.LENGTH_SHORT).show();
             }
         });
         alertDialogBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(),"You clicked on Cancel",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"You clicked on Cancel",Toast.LENGTH_SHORT).show();
             }
         });
 
