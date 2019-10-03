@@ -1,10 +1,9 @@
 package com.kulartist.foodbuddy;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
@@ -13,63 +12,60 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import home.Buddies;
+import com.kulartist.database_connection.DatabaseConnection;
+import com.kulartist.home.Buddies;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity {
 
-    /**
-     * Id to identity READ_CONTACTS permission request.
-     */
-//    private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-
-    // UI references.
-    private TextView mEmailView;
+    private EditText mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
+
 
     String email,password;
+
+    ProgressDialog progressDialog;
+    com.kulartist.database_connection.DatabaseConnection connectionClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mEmailView = (TextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
 
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+       // Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
 
- //       mLoginFormView = findViewById(R.id.login_form);
 
-        // Store values at the time of the login attempt.
          email = mEmailView.getText().toString();
          password = mPasswordView.getText().toString();
+
+
+        connectionClass = new com.kulartist.database_connection.DatabaseConnection();
+
+        progressDialog=new ProgressDialog(this);
 
 
 
     }
 
-    public void signIn(View view) {
+   public void signIn(View view) {
+       Dologin dologin=new Dologin();
+       dologin.execute();
 
-       if(mEmailView.getText().toString().equals("a") && mPasswordView.getText().toString().equals("a"))
+       /* if(mEmailView.getText().toString().equals("a") && mPasswordView.getText().toString().equals("a"))
         {
             Intent i = new Intent(LoginActivity.this, Buddies.class);
             startActivity(i);
@@ -96,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
        }
            // Toast.makeText(this,password+" Wrong "+email,Toast.LENGTH_LONG).show();
 
+        */
     }
 
     public void signUp(View view) {
@@ -111,5 +108,116 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-}
 
+
+
+
+
+
+    public class Dologin extends AsyncTask<String,String,String> {
+
+
+        String emailstr=mEmailView.getText().toString();
+        String passstr=mPasswordView.getText().toString();
+        String z="";
+        boolean isSuccess=false;
+
+        String em,password;
+
+
+        @Override
+        protected void onPreExecute() {
+
+
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            if( emailstr.trim().equals("") ||passstr.trim().equals(""))
+                z = "Please enter all fields....";
+            else
+            {
+                try {
+                    Connection con = connectionClass.CONN();
+                    if (con == null) {
+                        z = "Please check your internet connection";
+                    } else {
+
+                        //String query=" select * from demoregister where name='"+namestr+"' and email='"+emailstr+"' and PASSWORD = '"+passstr+"'";
+
+                        String query=" select userId,userPassword from userCredentials";
+
+
+                        Statement stmt = con.createStatement();
+                        // stmt.executeUpdate(query);
+
+
+                        ResultSet rs=stmt.executeQuery(query);
+
+                        while (rs.next())
+
+                        {
+                            //nm= rs.getString(1);
+                            em=rs.getString(1);
+                            password=rs.getString(2);
+
+
+
+
+                            if(em.equals(emailstr)&&password.equals(passstr))
+                            {
+
+                                isSuccess=true;
+                                z = "Login successfull";
+
+                            }
+
+                            else {
+
+                                isSuccess = false;
+                                z = "Login Unsuccessfull "+em+password;
+                                //name.setText();
+                            }
+
+
+
+                        }
+
+
+
+
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    isSuccess = false;
+                    z = "Exceptions"+ex;
+                }
+            }
+            return z;        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Toast.makeText(getBaseContext(),""+z,Toast.LENGTH_LONG).show();
+
+
+            if(isSuccess) {
+
+                Intent intent=new Intent(LoginActivity.this,Buddies.class);
+
+
+                startActivity(intent);
+            }
+
+
+            progressDialog.hide();
+
+        }
+    }
+}
