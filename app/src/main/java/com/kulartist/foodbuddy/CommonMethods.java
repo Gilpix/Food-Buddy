@@ -1,22 +1,11 @@
 package com.kulartist.foodbuddy;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-
-import home.Buddies;
 
 
 public class CommonMethods extends AppCompatActivity {

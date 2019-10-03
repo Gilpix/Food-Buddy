@@ -1,15 +1,10 @@
-package home;
+package com.kulartist.home;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 //import android.support.design.widget.Snackbar;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.kulartist.foodbuddy.R;
 

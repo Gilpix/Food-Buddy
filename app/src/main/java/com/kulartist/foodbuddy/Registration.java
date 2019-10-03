@@ -1,17 +1,12 @@
 package com.kulartist.foodbuddy;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import home.Buddies;
+import com.kulartist.home.Buddies;
 
 public class Registration extends CommonMethods {
 

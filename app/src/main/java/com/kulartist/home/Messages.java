@@ -1,14 +1,8 @@
-package home;
+package com.kulartist.home;
 
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.kulartist.foodbuddy.CommonMethods;
 import com.kulartist.foodbuddy.R;

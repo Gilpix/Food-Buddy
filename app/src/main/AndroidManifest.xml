@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,21 +14,23 @@
         android:roundIcon="@drawable/food_buddy"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="home.Messages"></activity>
+
+
+        <activity android:name="com.kulartist.home.Messages"></activity>
         <activity
-            android:name="home.BuddyProfile"
+            android:name="com.kulartist.home.BuddyProfile"
             android:label="@string/title_activity_buddy_profile" />
-        <activity android:name="home.MyProfile" />
+        <activity android:name="com.kulartist.home.MyProfile" />
 
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/text_view_button" />
 
-        <activity android:name="home.Notification" />
-        <activity android:name="home.Restaurant" />
-        <activity android:name="home.Settings" />
-        <activity android:name="home.Buddies" />
-        <activity android:name="home.Home" />
+        <activity android:name="com.kulartist.home.Notification" />
+        <activity android:name="com.kulartist.home.Restaurant" />
+        <activity android:name="com.kulartist.home.Settings" />
+        <activity android:name="com.kulartist.home.Buddies" />
+        <activity android:name="com.kulartist.home.Home" />
         <activity android:name=".ResetPassword" />
         <activity android:name=".ResetPassAuthenticate" />
         <activity android:name=".Registration" />

@@ -1,4 +1,4 @@
-package home;
+package com.kulartist.home;
 
 import android.content.Context;
 import android.view.LayoutInflater;
