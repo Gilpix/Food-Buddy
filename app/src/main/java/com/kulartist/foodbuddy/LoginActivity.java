@@ -148,13 +148,11 @@ public class LoginActivity extends AppCompatActivity {
                         z = "Please check your internet connection";
                     } else {
 
-                        //String query=" select * from demoregister where name='"+namestr+"' and email='"+emailstr+"' and PASSWORD = '"+passstr+"'";
 
                         String query=" select userId,userPassword from userCredentials";
 
 
                         Statement stmt = con.createStatement();
-                        // stmt.executeUpdate(query);
 
 
                         ResultSet rs=stmt.executeQuery(query);
@@ -181,7 +179,6 @@ public class LoginActivity extends AppCompatActivity {
 
                                 isSuccess = false;
                                 z = "Login Unsuccessfull "+em+password;
-                                //name.setText();
                             }
 
 
@@ -189,10 +186,11 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
 
-
-
-
+                        stmt.close();
+                        rs.close();
                     }
+                    con.close();
+
                 }
                 catch (Exception ex)
                 {
@@ -210,6 +208,8 @@ public class LoginActivity extends AppCompatActivity {
             if(isSuccess) {
 
                 Intent intent=new Intent(LoginActivity.this,Buddies.class);
+
+
 
 
                 startActivity(intent);
