@@ -172,6 +172,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 isSuccess=true;
                                 z = "Login successfull";
+                                CommonMethods.currentUserId=emailstr;
 
                             }
 
@@ -202,17 +203,39 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            Toast.makeText(getBaseContext(),""+z,Toast.LENGTH_LONG).show();
+
+
+
+
+
+
+
+            //Toast.makeText(getBaseContext(),""+z,Toast.LENGTH_LONG).show();
 
 
             if(isSuccess) {
 
                 Intent intent=new Intent(LoginActivity.this,Buddies.class);
-
-
-
-
                 startActivity(intent);
+            }
+            else
+            {
+                AlertDialog.Builder dlgAlert = new AlertDialog.Builder(LoginActivity.this, R.style.AlertDialogCustom);
+                //AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+
+
+                dlgAlert.setMessage("You have entered wrong password or username");
+                dlgAlert.setTitle("Error Message...");
+                dlgAlert.setPositiveButton("OK", null);
+                dlgAlert.setCancelable(true);
+                dlgAlert.create().show();
+
+                dlgAlert.setPositiveButton("DISMISS",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+
+                            }});
             }
 
 
