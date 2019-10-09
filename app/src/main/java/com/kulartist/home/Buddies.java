@@ -1,5 +1,6 @@
 package com.kulartist.home;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,46 +11,34 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import com.kulartist.database_connection.DatabaseConnection;
 import com.kulartist.foodbuddy.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Buddies extends Home {
     LinearLayout dynamicContent,bottonNavBar;
+    String connStatus="";
+    JSONObject mainObject=new JSONObject();
+    JSONArray mainArray=new JSONArray();
+
+
+    ProgressDialog progressDialog;
+    DatabaseConnection connectionClass;
+
+
+
 
     ListView simpleList;
 
-    String signsDescription[] = {
-            "Kuldeep.",
-            "Jack",
-            "John",
-            "Jerry",
-            "Janar",
-            "Kana",
-            "Kani",
-            "Kaanu",
-            "Kama",
-            "Karma",
-            "Karmi",
-            "Bhan",
-            "Kod",
-            "Bhopdi"};
-
-    String restaurantTiming[] = {
-            "Available",
-            "Available",
-            "Available",
-            "Available",
-            "Available",
-            "Available",
-            "Available",
-            "Available",
-            "Available",
-            "Available",
-            "Available",
-            "Not Available",
-            "Not Available",
-            "Not Available"};
 
     int signsImage[] = {R.drawable.user_pratikshya,
             R.drawable.user_pratikshya,
@@ -77,22 +66,120 @@ public class Buddies extends Home {
         bottonNavBar= (LinearLayout) findViewById(R.id.bottonNavBar);
         View wizard = getLayoutInflater().inflate(R.layout.activity_buddies, null);
         dynamicContent.addView(wizard);
-
-
         setActionBarTitle("Buddies");
 
 
 
-        RadioGroup rg=(RadioGroup)findViewById(R.id.radioGroup1);
+
+
+
+        connectionClass = new DatabaseConnection();
+        progressDialog=new ProgressDialog(this);
+
+
+
+//        RadioGroup rg=(RadioGroup)findViewById(R.id.radioGroup1);
         RadioButton rb=(RadioButton)findViewById(R.id.buddies);
         rb.setCompoundDrawablesWithIntrinsicBounds( 0,R.drawable.home, 0,0);
         rb.setTextColor(Color.parseColor("#cccccc"));
 
 
+        displayBuddiesList();
+
+
+
+
+    }
+
+
+
+
+    public void displayBuddiesList()
+    {
+
+        try {
+            Connection con = connectionClass.CONN();
+            if (con == null) {
+                connStatus = "Please check your internet connection";
+            } else {
+
+
+
+                String query=" select * from userRegistered";
+
+                PreparedStatement stm = con.prepareStatement(query);
+
+                ResultSet rs=stm.executeQuery();
+                String usr_name,user_email;
+
+                while(rs.next()) {
+                    mainObject=new JSONObject();
+                     //usr_name = rs.getString("userName");
+                    mainObject.accumulate("userName",rs.getString("userName"));
+                    mainObject.accumulate("userId",rs.getString("userId"));
+                    mainObject.accumulate("age",rs.getString("age"));
+                    mainObject.accumulate("userBio",rs.getString("userBio"));
+                    mainObject.accumulate("userGender",rs.getString("userGender"));
+
+                    mainArray.put(mainObject);
+
+                }
+
+
+                stm.close();
+                rs.close();
+                getRecyclerData(mainArray);
+            }
+            con.close();
+
+        }
+        catch (Exception ex)
+        {
+
+            Toast.makeText(getBaseContext(),"Status : "+ex.getMessage()+"--- "+connStatus,Toast.LENGTH_LONG).show();
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+    public void getRecyclerData(final  JSONArray mainArray) throws JSONException {
+
+
+
+        final String[] userName=new String[mainArray.length()];
+        final String[] userId=new String[mainArray.length()];
+        String[] age=new String[mainArray.length()];
+        String[] userBio=new String[mainArray.length()];
+        String[] userGender=new String[mainArray.length()];
+        for(int j=0;j<mainArray.length();j++)
+        {
+            JSONObject a =new JSONObject();
+            a=mainArray.getJSONObject(j);
+            userName[j]=a.getString("userName");
+            userId[j]=a.getString("userId");
+            age[j]=a.getString("age");
+            userBio[j]=a.getString("userBio");
+            userGender[j]=a.getString("userGender");
+
+
+
+        }
+
+
+
+
+
 
 
         simpleList = (ListView)findViewById(R.id.simpleListView);
-        RegulatoryCustomAdapter customAdapter = new RegulatoryCustomAdapter(getApplicationContext(), signsDescription,restaurantTiming, signsImage);
+        RecyclerCustomAdapter customAdapter = new RecyclerCustomAdapter(getApplicationContext(), userName,userId, signsImage);
         simpleList.setAdapter(customAdapter);
 
 
@@ -105,6 +192,13 @@ public class Buddies extends Home {
 
 
                 Intent in = new Intent(Buddies.this, BuddyProfile.class);
+                in.putExtra("uName",userName[position]);
+                in.putExtra("userId",userId[position]);
+                try {
+                    in.putExtra("buddyProfileObject",mainArray.getJSONObject(position).toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(in);
                 //finish();
@@ -112,13 +206,13 @@ public class Buddies extends Home {
                 switch(position+1)
                 {
                     case 1:
-                       // Intent b = new Intent(Intent.ACTION_VIEW, Uri.parse("https://developer.android.com/guide/components/activities/activity-lifecycle"));
-                       // startActivity(b);
+                        // Intent b = new Intent(Intent.ACTION_VIEW, Uri.parse("https://developer.android.com/guide/components/activities/activity-lifecycle"));
+                        // startActivity(b);
                         break;
 
 
                     case 5:
-                       // Intent c = new Intent(Intent.ACTION_VIEW, Uri.parse("https://developer.android.com/reference/android/content/Intent"));
+                        // Intent c = new Intent(Intent.ACTION_VIEW, Uri.parse("https://developer.android.com/reference/android/content/Intent"));
                         //startActivity(c);
 
 
@@ -135,7 +229,16 @@ public class Buddies extends Home {
         });
 
 
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -180,4 +283,13 @@ public class Buddies extends Home {
     }
 
 
-}
+
+
+
+
+
+
+
+
+
+    }
