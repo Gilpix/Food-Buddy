@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.kulartist.database_connection.DatabaseConnection;
+import com.kulartist.foodbuddy.CommonMethods;
 import com.kulartist.foodbuddy.R;
 
 import org.json.JSONArray;
@@ -105,12 +106,17 @@ public class Buddies extends Home {
 
 
 
-                String query=" select * from userRegistered";
+               // String query=" select * from userRegistered";
+
+                String query="SELECT userName,userRegistered.userId,age,userBio,userGender,availability FROM `userRegistered` \n" +
+                        " JOIN userAvailability \n" +
+                        " ON userAvailability.userId=userRegistered.userId where availability=1 and " +
+                        " userRegistered.userId !=?";
 
                 PreparedStatement stm = con.prepareStatement(query);
+                stm.setString(1,CommonMethods.currentUserId);
 
                 ResultSet rs=stm.executeQuery();
-                String usr_name,user_email;
 
                 while(rs.next()) {
                     mainObject=new JSONObject();
@@ -120,6 +126,7 @@ public class Buddies extends Home {
                     mainObject.accumulate("age",rs.getString("age"));
                     mainObject.accumulate("userBio",rs.getString("userBio"));
                     mainObject.accumulate("userGender",rs.getString("userGender"));
+                    mainObject.accumulate("userAvailability",rs.getString("availability"));
 
                     mainArray.put(mainObject);
 
@@ -158,6 +165,7 @@ public class Buddies extends Home {
         String[] age=new String[mainArray.length()];
         String[] userBio=new String[mainArray.length()];
         String[] userGender=new String[mainArray.length()];
+        String[] userAvailability=new String[mainArray.length()];
         for(int j=0;j<mainArray.length();j++)
         {
             JSONObject a =new JSONObject();
@@ -167,6 +175,10 @@ public class Buddies extends Home {
             age[j]=a.getString("age");
             userBio[j]=a.getString("userBio");
             userGender[j]=a.getString("userGender");
+            if(a.getString("userAvailability").equals("1"))
+                userAvailability[j]="Available";
+            else
+                userAvailability[j]="Not Available";
 
 
 
@@ -179,7 +191,7 @@ public class Buddies extends Home {
 
 
         simpleList = (ListView)findViewById(R.id.simpleListView);
-        RecyclerCustomAdapter customAdapter = new RecyclerCustomAdapter(getApplicationContext(), userName,userId, signsImage);
+        RecyclerCustomAdapter customAdapter = new RecyclerCustomAdapter(getApplicationContext(), userName,userAvailability, signsImage);
         simpleList.setAdapter(customAdapter);
 
 
