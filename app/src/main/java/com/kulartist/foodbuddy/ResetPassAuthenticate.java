@@ -49,6 +49,7 @@ public class ResetPassAuthenticate extends CommonMethods {
 
 
     public void resetPasswordAuthenticate(View view) {
+        CommonMethods.hideSoftKeyboard(this);
         restPassEmail=emailPassToReset.getText().toString();
 
 
@@ -66,6 +67,7 @@ public class ResetPassAuthenticate extends CommonMethods {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        CommonMethods.hideSoftKeyboard(this);
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(this, LoginActivity.class);

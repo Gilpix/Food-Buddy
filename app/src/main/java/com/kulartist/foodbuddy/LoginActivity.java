@@ -1,6 +1,7 @@
 package com.kulartist.foodbuddy;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import com.kulartist.database_connection.DatabaseConnection;
 import com.kulartist.home.Buddies;
+import com.kulartist.home.Restaurant;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -29,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText mEmailView;
     private EditText mPasswordView;
-
 
     String email,password;
 
@@ -46,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordView = findViewById(R.id.password);
 
 
-       // Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+
 
 
          email = mEmailView.getText().toString();
@@ -58,10 +60,26 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog=new ProgressDialog(this);
 
 
+//
+//        Intent intent=new Intent(LoginActivity.this, Restaurant.class);
+//        startActivity(intent);
+
+
 
     }
 
+
+
+
+
+
+
    public void signIn(View view) {
+
+
+       CommonMethods.hideSoftKeyboard(this);
+
+
        Dologin dologin=new Dologin();
        dologin.execute();
 
@@ -149,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
 
 
-                        String query=" select userId,userPassword from userCredentials";
+                        String query=" select userId,userPassword from userRegistered";
 
 
                         Statement stmt = con.createStatement();
@@ -173,6 +191,7 @@ public class LoginActivity extends AppCompatActivity {
                                 isSuccess=true;
                                 z = "Login successfull";
                                 CommonMethods.currentUserId=emailstr;
+                                break;
 
                             }
 
@@ -203,19 +222,16 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-
-
-
-
-
-
-
-            //Toast.makeText(getBaseContext(),""+z,Toast.LENGTH_LONG).show();
+           // Toast.makeText(getBaseContext(),""+z,Toast.LENGTH_LONG).show();
 
 
             if(isSuccess) {
 
                 Intent intent=new Intent(LoginActivity.this,Buddies.class);
+
+
+
+
                 startActivity(intent);
             }
             else
@@ -238,9 +254,11 @@ public class LoginActivity extends AppCompatActivity {
                             }});
             }
 
+        }
 
-            progressDialog.hide();
+
+            //progressDialog.hide();
 
         }
     }
-}
+

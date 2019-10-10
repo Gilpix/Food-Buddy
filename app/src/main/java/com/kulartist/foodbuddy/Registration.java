@@ -69,6 +69,7 @@ public class Registration extends CommonMethods {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        CommonMethods.hideSoftKeyboard(this);
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(this, LoginActivity.class);
@@ -88,6 +89,9 @@ public class Registration extends CommonMethods {
 
 
     public void SignUpResult(View view) {
+
+        CommonMethods.hideSoftKeyboard(this);
+
         if(rMale.isChecked())
             gender="M";
         else if(rFemale.isChecked())
@@ -124,6 +128,7 @@ public class Registration extends CommonMethods {
 
 
     public void signInAlreadyAccount(View view) {
+        CommonMethods.hideSoftKeyboard(this);
         Intent i =new Intent(Registration.this, LoginActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
